@@ -1,0 +1,111 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Dashboard Aplikasi Pencatat Kehadiran</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-item fill="outline" (click)="logout()">
+      <ion-icon slot="start" ios="exit-outline" md="exit-sharp"></ion-icon>
+      <ion-label>Logout</ion-label>
+    </ion-item> 
+  </ion-card>
+
+  <ion-card>
+    <ion-button fill="outline" (click)="open_modal_tambah(true)" expand="block"><ion-icon name="create"></ion-icon>Tambah Kehadiran</ion-button>
+  </ion-card>
+  <ion-card *ngFor="let item of dataKehadiran">
+    <ion-item>
+      <ion-label>
+      {{item.nama}}
+      <br>
+      <p>Tanggal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{item.tanggal}}</p>
+      <p>Jam &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{item.waktu}}</p>
+      <p>Nama Acara : {{item.acara}}</p>
+      
+
+      </ion-label>
+      <ion-button fill="outline" color="warning" expand="block" (click)="open_modal_edit(true,item.id)"><ion-icon name="grid"></ion-icon>Edit</ion-button>
+      <ion-button fill="outline" color="danger" slot="end" (click)="hapusKehadiran(item.id)"><ion-icon name="trash-bin"></ion-icon>Hapus</ion-button>
+    </ion-item>
+  </ion-card>
+</ion-content>
+
+<!-- ini untuk modal tambah -->
+<ion-modal [isOpen]="modal_tambah">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="cancel()">Batal</ion-button>
+      </ion-buttons>
+        <ion-title>Tambah Kehadiran</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+    <ion-item>
+      <ion-input label="Nama Kehadiran" labelPlacement="floating" required [(ngModel)]="nama"
+      placeholder="Masukkan Nama Kehadiran" type="text">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label='Tanggal Kehadiran' labelPlacement="floating" required [(ngModel)]="tanggal"
+      placeholder="Masukkan Tanggal Kehadiran" type="date">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label='Waktu Kehadiran' labelPlacement="floating" required [(ngModel)]="waktu"
+      placeholder="Masukkan Waktu Kehadiran" type="time">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label='Acara' labelPlacement="floating" required [(ngModel)]="acara"
+      placeholder="Masukkan Nama Acara" type="text">
+      </ion-input>
+    </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-button fill="outline" color="success" type="button" (click)="tambahKehadiran()" color="primary" shape="full" expand="block">Tambah
+          Kehadiran
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+  
+<!-- ini untuk modal edit -->
+<ion-modal [isOpen]="modal_edit">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="cancel()">Batal</ion-button>
+      </ion-buttons>
+        <ion-title>Edit Kehadiran</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+    <ion-item>
+      <ion-input label="Nama Kehadiran" labelPlacement="floating" required [(ngModel)]="nama" placeholder="Masukkan Nama Kehadiran" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label='Tanggal Kehadiran' labelPlacement="floating" required [(ngModel)]="tanggal" placeholder="Masukkan Tanggal Kehadiran" type="date"> </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label='Waktu Kehadiran' labelPlacement="floating" required [(ngModel)]="waktu" placeholder="Masukkan Waktu Kehadiran" type="time"> </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label='Nama Acara' labelPlacement="floating" required [(ngModel)]="acara" placeholder="Masukkan Nama Acara" type="text"> </ion-input>
+    </ion-item>
+    <ion-input required [(ngModel)]="id" type="hidden">
+    </ion-input>
+      <ion-row>
+        <ion-col>
+          <ion-button type="button" (click)="editKehadiran()" color="primary" shape="full" expand="block">Edit Kehadiran </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-content>
+  </ng-template>
+</ion-modal>

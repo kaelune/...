@@ -1,0 +1,7 @@
+{
+  "name": "kehadiranionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
