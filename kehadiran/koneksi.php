@@ -6,5 +6,5 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json, charset=utf-8');
 //membuat variable koneksi ke mysql
-$koneksi = mysqli_connect('localhost','root','','kehadiran',3307) or die ('koneksi
+$koneksi = mysqli_connect('localhost','root','','kehadiran') or die ('koneksi
 gagal');
